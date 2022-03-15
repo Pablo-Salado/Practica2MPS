@@ -8,5 +8,5 @@
 /httpRequests/
 /.idea
 /target
-/target/generated-sources
-/target/generated-test-sources
+/target/classes
+/target/test-classes
