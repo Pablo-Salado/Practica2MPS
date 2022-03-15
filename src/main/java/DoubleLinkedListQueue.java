@@ -1,2 +1,102 @@
-public class DoubleLinkedListQueue<T> {
+public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
+    private DequeNode<T> first;
+    private DequeNode<T> last;
+    private int numElem;
+
+    public DoubleLinkedListQueue (){
+        first = null;
+        last = null;
+        numElem = 0;
+    }
+
+    private void appendFirst(DequeNode node){
+        node.setPrevious(null);
+        node.setNext(null);
+        first = node;
+        last = node;
+    }
+
+    @Override
+    public void append(DequeNode node) {
+        if (node == null){
+            throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
+        }else if (numElem == 0){
+            appendFirst(node);
+        } else {
+            node.setPrevious(last);
+            node.setNext(null);
+            last = node;
+        }
+        numElem += 1;
+    }
+
+    @Override
+    public void appendLeft(DequeNode node) {
+        if (node == null){
+            throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
+        }else if (numElem == 0){
+            appendFirst(node);
+        } else {
+            node.setPrevious(null);
+            node.setNext(first);
+            first = node;
+        }
+        numElem += 1;
+    }
+
+    @Override
+    public void deleteFirst() {
+        if (numElem == 0){
+            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+        } else if (numElem == 1){
+            last = null;
+            first = null;
+        } else {
+            first = first.getNext();
+        }
+        numElem -= 1;
+    }
+
+    @Override
+    public void deleteLast() {
+        if (numElem == 0){
+            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+        } else if (numElem == 1){
+            last = null;
+            first = null;
+        } else {
+            last = last.getPrevious();
+        }
+        numElem -= 1;
+    }
+
+    @Override
+    public DequeNode peekFirst() {
+        if (numElem == 0) {
+            throw new RuntimeException("Error al devolver el primer elemento: la lista no contiene elementos");
+        }
+        return first;
+    }
+
+    @Override
+    public DequeNode peekLast() {
+        if (numElem == 0) {
+            throw new RuntimeException("Error al devolver el ultimo elemento: la lista no contiene elementos");
+        }
+        return last;
+    }
+
+    @Override
+    public int size() {
+        return numElem;
+    }
+
+    public static void main(String[] args) {
+        DoubleLinkedListQueue<DequeNode> lista = new DoubleLinkedListQueue<DequeNode>();
+        //lista.append(null);
+        System.out.println(lista.peekFirst());
+        System.out.println(lista.peekLast());
+
+        System.out.println(lista.size());
+    }
 }

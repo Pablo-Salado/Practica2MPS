@@ -1,0 +1,250 @@
+Casos a probar de DequeNode
+
+--------------------------------------------------------------------------------
+1)
+Scenario - Devuelve el nodo al que se accede 
+
+Given - Accedemos al nodo
+ 
+When - Usamos getItem()
+ 
+Then - Devuelve el nodo
+--------------------------------------------------------------------------------
+2)
+Scenario - Devolver el siguiente nodo del nodo al que accedemos
+
+Given - Accedemos al nodo
+ 
+When - Usamos getNext()
+ 
+Then - Devuelve el siguiente nodo
+--------------------------------------------------------------------------------
+3)
+Scenario - Intentamos acceder al siguiente del ultimo nodo
+
+Given - Accedemos al ultimo nodo
+ 
+When - Usamos getNext()
+ 
+Then - Devuelve Null ya que no tiene
+--------------------------------------------------------------------------------
+4)
+Scenario - Devolver el nodo anterior del nodo al que accedemos
+
+Given - Accedemos al nodo
+ 
+When - Usamos getPrevious()
+ 
+Then - Devuelve el nodo anterior
+--------------------------------------------------------------------------------
+5)
+Scenario - Intentamos acceder al nodo anterior del primer nodo
+
+Given - Accedemos al primer nodo
+ 
+When - Usamos getPrevious()
+ 
+Then - Devuelve Null ya que no tiene
+--------------------------------------------------------------------------------
+6)
+Scenario - Preguntamos si es el primer Nodo
+
+Given - Accedemos al primer nodo
+ 
+When - Usamos isFirstNode()
+ 
+Then - Devuelve TRUE
+--------------------------------------------------------------------------------
+7)
+Scenario - Preguntamos si es el primer nodo
+
+Given - Accedemos a un nodo distinto del primero
+ 
+When - Usamos isFirstNode()
+ 
+Then - Devuelve FALSE
+--------------------------------------------------------------------------------
+8)
+Scenario - Preguntamos si es el ultimo nodo
+
+Given - Accedemos al ultimo nodo
+ 
+When - Usamos isLastNode()
+ 
+Then - Devuelve TRUE
+--------------------------------------------------------------------------------
+9)
+Scenario - Preguntamos si es el ultimo nodo
+
+Given - Accedemos a un nodo distinto del ultimo
+ 
+When - Usamos isLastNode()
+ 
+Then - Devuelve FALSE
+--------------------------------------------------------------------------------
+10)
+Scenario - Preguntamos si el nodo NO es terminal
+
+Given - Accedemos a un nodo que sea el primero o el ultimo
+ 
+When - Usamos isNotATerminalNode()
+ 
+Then - Devuelve FALSE
+--------------------------------------------------------------------------------
+11)
+Scenario - Preguntamos si el nodo NO es terminal
+
+Given - Accedemos a un nodo que NO sea el primero o el ultimo
+ 
+When - Usamos isNotATerminalNode()
+ 
+Then - Devuelve TRUE
+--------------------------------------------------------------------------------
+12)
+Scenario - Modificamos el nodo
+
+Given - Accedemos al nodo
+ 
+When - Usamos setItem() y comprobamos si se ha modificado
+ 
+Then - Devuelve TRUE si se ha modificado correctamente o ERROR si no se ha modificado
+--------------------------------------------------------------------------------
+13)
+Scenario - Modificamos el nodo siguiente
+
+Given - Accedemos al nodo
+ 
+When - Usamos setNext() y comprobamos si se ha modificado
+ 
+Then - Devuelve TRUE si se ha modificado correctamente o ERROR si no se ha modificado
+--------------------------------------------------------------------------------
+14)
+Scenario - Modificamos el nodo anterior
+
+Given - Accedemos al nodo
+ 
+When - Usamos setPrevious() y comprobamos si se ha modificado
+ 
+Then - Devuelve TRUE si se ha modificado correctamente o ERROR si no se ha modificado
+--------------------------------------------------------------------------------
+
+Casos a probar de DoubleLinkedListQueue:
+
+--------------------------------------------------------------------------------
+1)
+Scenario - Añadir un nodo al principio de la lista
+
+Given - Tenemos la lista y el nodo a añadir
+ 
+When - Usamos appendLeft(nodoAInsertar) y comprobamos si se ha insertado
+ 
+Then - Devolvera TRUE si el nodo se ha insertado correctamente al principio de la lista
+--------------------------------------------------------------------------------
+2)
+Scenario - Añadir un nodo vacio al principio de la lista
+
+Given - Tenemos la lista y el nodo vacio a añadir
+ 
+When - Usamos appendLeft(nodoAInsertar)
+ 
+Then - Devolvera ERROR ya que el nodo estaba vacio
+--------------------------------------------------------------------------------
+3)
+Scenario - Añadir un nodo al final de la lista
+
+Given - Tenemos la lista y el nodo a añadir
+ 
+When - Usamos append(nodoAInsertar) y comprobamos si se ha insertado
+ 
+Then - Devolvera TRUE si el nodo se ha insertado correctamente al final de la lista
+--------------------------------------------------------------------------------
+4)
+Scenario - Añadir un nodo vacio al final de la lista
+
+Given - Tenemos la lista y el nodo vacio a añadir
+ 
+When - Usamos append(nodoAInsertar)
+ 
+Then - Devolvera ERROR ya que el nodo estaba vacio
+--------------------------------------------------------------------------------
+5)
+Scenario - Eliminar el primer nodo de una lista
+
+Given - Tenemos la lista
+ 
+When - Usamos deleteFirst() y comprobamos que se ha borrado correcamente
+ 
+Then - Devolvera TRUE si se ha borrado correctamente
+--------------------------------------------------------------------------------
+6)
+Scenario - Eliminar el primer nodo de una lista vacia
+
+Given - Tenemos la lista vacia
+ 
+When - Usamos deleteFirst()
+ 
+Then - Devolvera ERROR ya que la lista esta vacia
+--------------------------------------------------------------------------------
+7)
+Scenario - Eliminar el ultimo nodo de una lista
+
+Given - Tenemos la lista
+ 
+When - Usamos deleteLast() y comprobamos que se ha borrado correcamente
+ 
+Then - Devolvera TRUE si se ha borrado correctamente
+--------------------------------------------------------------------------------
+8)
+Scenario - Eliminar el ultimo nodo de una lista vacia
+
+Given - Tenemos la lista vacia
+ 
+When - Usamos deleteLast()
+ 
+Then - Devolvera ERROR ya que la lista esta vacia
+--------------------------------------------------------------------------------
+9)
+Scenario - Mostrar el primer nodo de una lista
+
+Given - Tenemos la lista
+ 
+When - Usamos peekFirst()
+ 
+Then - Devolvera el primer nodo de la lista
+--------------------------------------------------------------------------------
+10)
+Scenario - Mostrar el primer nodo de una lista vacia
+
+Given - Tenemos la lista vacia
+ 
+When - Usamos peekFirst()
+ 
+Then - Devolvera ERROR ya que la lista esta vacia
+--------------------------------------------------------------------------------
+11)
+Scenario - Mostrar el ultimo nodo de una lista
+
+Given - Tenemos la lista
+ 
+When - Usamos peekLast()
+ 
+Then - Devolvera el primer nodo de la lista
+--------------------------------------------------------------------------------
+12)
+Scenario - Mostrar el ultimo nodo de una lista vacia
+
+Given - Tenemos la lista vacia
+ 
+When - Usamos peekLast()
+ 
+Then - Devolvera ERROR ya que la lista esta vacia
+--------------------------------------------------------------------------------
+13)
+Scenario - Mostrar el tamaño de la lista
+
+Given - Tenemos la lista
+ 
+When - Usamos size()
+ 
+Then - Devolvera el tamaño de la lista
+--------------------------------------------------------------------------------
