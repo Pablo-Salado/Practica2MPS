@@ -23,6 +23,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         }else if (numElem == 0){
             appendFirst(node);
         } else {
+            last.setNext(node);
             node.setPrevious(last);
             node.setNext(null);
             last = node;
@@ -37,6 +38,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         }else if (numElem == 0){
             appendFirst(node);
         } else {
+            first.setPrevious(node);
             node.setPrevious(null);
             node.setNext(first);
             first = node;
@@ -53,6 +55,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
             first = null;
         } else {
             first = first.getNext();
+            first.setPrevious(null);
         }
         numElem -= 1;
     }
@@ -66,6 +69,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
             first = null;
         } else {
             last = last.getPrevious();
+            last.setNext(null);
         }
         numElem -= 1;
     }
