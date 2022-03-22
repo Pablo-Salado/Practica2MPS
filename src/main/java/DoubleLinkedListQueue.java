@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     private DequeNode<T> first;
     private DequeNode<T> last;
@@ -18,7 +20,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
 
     @Override
     public void append(DequeNode node) {
-        if (node == null){
+        if (node.getItem() == null){
             throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
         }else if (numElem == 0){
             appendFirst(node);
@@ -33,7 +35,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
 
     @Override
     public void appendLeft(DequeNode node) {
-        if (node == null){
+        if (node.getItem() == null){
             throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
         }else if (numElem == 0){
             appendFirst(node);
@@ -50,7 +52,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     public void deleteFirst() {
         if (numElem == 0){
             throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
-        } else if (numElem == 1){
+        } else if(numElem == 1) {
             last = null;
             first = null;
         } else {
@@ -64,7 +66,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     public void deleteLast() {
         if (numElem == 0){
             throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
-        } else if (numElem == 1){
+        }else if(numElem == 1) {
             last = null;
             first = null;
         } else {
@@ -95,12 +97,55 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         return numElem;
     }
 
-    public static void main(String[] args) {
-        DoubleLinkedListQueue<DequeNode> lista = new DoubleLinkedListQueue<DequeNode>();
-        //lista.append(null);
-        System.out.println(lista.peekFirst());
-        System.out.println(lista.peekLast());
+    @Override
+    public DequeNode getAt(int position) {
+        DequeNode result = peekFirst();
+        int i = 0;
 
-        System.out.println(lista.size());
+        if (position > numElem-1) {
+            throw new RuntimeException("Error: la posicion requerida no existe");
+        }
+
+        while (i < position && result.getNext() != null){
+            result.getNext();
+        }
+
+        return result;
+    }
+
+    @Override
+    public DequeNode find(Object item) {
+        DequeNode res = peekFirst();
+        int i = 0;
+
+        while (i<numElem && res.getItem() != item){
+            if(res.getNext() == null){
+                throw new RuntimeException("Error: el objeto buscado no esta en la lista");
+            } else {
+                res = res.getNext();
+                i++;
+            }
+        }
+
+        return res;
+    }
+
+    @Override
+    public void delete(DequeNode node) {
+        if (numElem == 0){
+            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+        }  else if (numElem == 1){
+            last = null;
+            first = null;
+        } else {
+            node.getPrevious().setNext(node.getNext());
+            node.getNext().setPrevious(node.getPrevious());
+        }
+        numElem -= 1;
+    }
+
+    @Override
+    public void sort(Comparator comparator) {
+
     }
 }
