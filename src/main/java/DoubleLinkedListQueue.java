@@ -18,7 +18,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
 
     @Override
     public void append(DequeNode node) {
-        if (node == null){
+        if (node.getItem() == null){
             throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
         }else if (numElem == 0){
             appendFirst(node);
@@ -33,7 +33,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
 
     @Override
     public void appendLeft(DequeNode node) {
-        if (node == null){
+        if (node.getItem() == null){
             throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
         }else if (numElem == 0){
             appendFirst(node);
@@ -95,12 +95,4 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         return numElem;
     }
 
-    public static void main(String[] args) {
-        DoubleLinkedListQueue<DequeNode> lista = new DoubleLinkedListQueue<DequeNode>();
-        //lista.append(null);
-        System.out.println(lista.peekFirst());
-        System.out.println(lista.peekLast());
-
-        System.out.println(lista.size());
-    }
 }
