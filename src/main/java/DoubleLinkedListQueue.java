@@ -21,7 +21,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public void append(DequeNode node) {
         if (node.getItem() == null){
-            throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
+            throw new RuntimeException("Error al añadir un nodo: el nodo es nulo");
         }else if (numElem == 0){
             appendFirst(node);
         } else {
@@ -36,7 +36,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public void appendLeft(DequeNode node) {
         if (node.getItem() == null){
-            throw new RuntimeException("Error al añadir un elemento: el elemento es nulo");
+            throw new RuntimeException("Error al añadir un nodo: el nodo es nulo");
         }else if (numElem == 0){
             appendFirst(node);
         } else {
@@ -51,7 +51,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public void deleteFirst() {
         if (numElem == 0){
-            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+            throw new RuntimeException("Error al borrar un nodo: la lista no contiene nodos");
         } else if(numElem == 1) {
             last = null;
             first = null;
@@ -65,7 +65,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public void deleteLast() {
         if (numElem == 0){
-            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+            throw new RuntimeException("Error al borrar un nodo: la lista no contiene nodos");
         }else if(numElem == 1) {
             last = null;
             first = null;
@@ -79,7 +79,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public DequeNode peekFirst() {
         if (numElem == 0) {
-            throw new RuntimeException("Error al devolver el primer elemento: la lista no contiene elementos");
+            throw new RuntimeException("Error al devolver el primer elemento: la lista no contiene nodos");
         }
         return first;
     }
@@ -87,7 +87,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public DequeNode peekLast() {
         if (numElem == 0) {
-            throw new RuntimeException("Error al devolver el ultimo elemento: la lista no contiene elementos");
+            throw new RuntimeException("Error al devolver el ultimo elemento: la lista no contiene nodos");
         }
         return last;
     }
@@ -102,7 +102,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         DequeNode result = peekFirst();
         int i = 0;
 
-        if (position > numElem-1) {
+        if (position > numElem-1 || position < 0) {
             throw new RuntimeException("Error: la posicion requerida no existe");
         }
 
@@ -133,19 +133,64 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     @Override
     public void delete(DequeNode node) {
         if (numElem == 0){
-            throw new RuntimeException("Error al borrar un elemento: la lista no contiene elementos");
+            throw new RuntimeException("Error al borrar un nodo: la lista no contiene nodos");
         }  else if (numElem == 1){
             last = null;
             first = null;
+            numElem -= 1;
+        } else if (node.equals(peekFirst())) {
+            deleteFirst();
+        } else if (node.equals(peekLast())) {
+            deleteLast();
         } else {
-            node.getPrevious().setNext(node.getNext());
-            node.getNext().setPrevious(node.getPrevious());
+            DequeNode prev, curr, next;
+            prev = first;
+            curr = first.getNext();
+            while (curr != null && !curr.equals(node)){
+                prev = curr;
+                curr = curr.getNext();
+            }
+            if (curr.equals(node)){
+                next = curr.getNext();
+                prev.setNext(next);
+                numElem -= 1;
+            } else {
+                throw new RuntimeException("Error: el nodo no esta en la lista");
+            }
         }
-        numElem -= 1;
     }
 
     @Override
     public void sort(Comparator comparator) {
+        DoubleLinkedListQueue aux = new DoubleLinkedListQueue();
+        DequeNode min = getMin(this, comparator);
 
+        while (numElem != 0){
+            aux.append(min);
+            this.delete(min);
+            numElem--;
+            min = getMin(this, comparator);
+        }
+        first = aux.peekFirst();
+        last = aux.peekLast();
+        numElem = aux.size();
+    }
+
+    private DequeNode<T> getMin (DoubleLinkedListQueue list, Comparator<Object> comparator){
+        DequeNode aux = list.peekFirst().getNext();
+        DequeNode res = list.peekFirst();
+
+        if (aux == null || res == null) {
+            throw new RuntimeException("Error: la lista esta vacia");
+        } else {
+            while (aux != null && res != null) {
+                if (comparator.compare(aux.getItem(), res.getItem()) < 0){
+                    res = aux;
+                } else {
+                    aux = aux.getNext();
+                }
+            }
+            return res;
+        }
     }
 }
