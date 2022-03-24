@@ -209,32 +209,33 @@ public class DoubleLinkedListQueueTest {
         Object obtainedValue = list.size();
 
         assertEquals(expectedValue,obtainedValue);
-    }/*
+    }
     @Test // 21
-    public void shouldReturnTrueWhenSortingCorrectlyAList(){
+    public void shouldReturnTrueWhenSortingCorrectlyAList() {
         Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1-o2;
+                return o1 - o2;
             }
         };
 
         list.append(node2);
         list.append(node);
-        list.append(new DequeNode(6,null, null));
+        list.append(new DequeNode(6, null, null));
 
         DoubleLinkedListQueue aux = new DoubleLinkedListQueue();
-        aux.append(node);
+
+        aux.append(new DequeNode(5, null, null));
         aux.append(new DequeNode(6, null, null));
-        aux.append(node2);
+        aux.append(new DequeNode(7, null, null));
 
         list.sort(comparator);
 
         Object expectedValue = aux;
         Object obtainedValue = list;
 
-        assertEquals(expectedValue,obtainedValue);
-    }*/
+        assertEquals(expectedValue, obtainedValue);
+    }
     @Test // 22
     public void shouldReturnErrorWhenAccesingAWrongPosition(){
         assertThrows(RuntimeException.class, () -> list.getAt(list.size()+1));
