@@ -2,6 +2,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DoubleLinkedListQueueTest {
@@ -34,10 +36,9 @@ public class DoubleLinkedListQueueTest {
         assertEquals(expectedValue,obtainedValue);
     }
     @Test
-    public void shouldReturnErrorIfNodeToAddIsNull(){
+    public void shouldReturnErrorIfNodeToAddAtFirstOfTheListIsNull(){
         node = new DequeNode(null,null,null);
 
-        assertThrows(RuntimeException.class, () -> list.append(node));
         assertThrows(RuntimeException.class, () -> list.appendLeft(node));
     }
     @Test
@@ -62,14 +63,11 @@ public class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
-    public void shouldReturn0WhenDeletingTheLastNodeLeftOnTheList(){
-        list.append(node);
-        list.deleteFirst();
-        Object expectedValue = 0;
-        Object obtainedValue = list.size();
+    @Test // 5
+    public void shouldReturnErrorIfNodeToAddAtLastOfTheListIsNull(){
+        node = new DequeNode(null,null,null);
 
-        assertEquals(expectedValue,obtainedValue);
+        assertThrows(RuntimeException.class, () -> list.append(node));
     }
     @Test
     public void shouldReturnTrueIfLastNodeWasDeleted(){
@@ -84,7 +82,7 @@ public class DoubleLinkedListQueueTest {
     }
 
     @Test
-    public void shouldReturnErrorIfDeletingANodeFromAnEmptyList(){
+    public void shouldReturnErrorIfDeletingFirstOrLastNodeFromAnEmptyList(){
 
         assertThrows(RuntimeException.class, () -> list.deleteLast());
         assertThrows(RuntimeException.class, () -> list.deleteFirst());
@@ -102,7 +100,7 @@ public class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
+    @Test // 9
     public void shouldReturnTheLastNodeOnTheList(){
         list.appendLeft(node2);
         list.append(node);
@@ -128,6 +126,132 @@ public class DoubleLinkedListQueueTest {
         Object obtainedValue = list.size();
         assertEquals(expectedValue,obtainedValue);
     }
+    @Test // 12
+    public void shouldReturn0WhenDeletingTheLastNodeOnTheList(){
+        list.append(node);
+        list.delete(node);
+        Object expectedValue = 0;
+        Object obtainedValue = list.size();
 
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 13
+    public void shouldReturnTrueWhenDeletingTheFirstNodeOnTheList(){
+        list.append(node);
+        list.deleteFirst();
+        Object expectedValue = 0;
+        Object obtainedValue = list.size();
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 14
+    public void shouldReturnTrueWhenDeletingTheLastNodeOnTheList(){
+        list.append(node);
+        list.deleteLast();
+        Object expectedValue = 0;
+        Object obtainedValue = list.size();
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 15
+    public void shouldReturnTrueWhenAccesingTheExpectedNode(){
+        list.append(node);
+        list.append(node2);
+
+        Object expectedValue = node2;
+        Object obtainedValue = list.getAt(1);
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 16
+    public void shouldReturnTrueWhenFindingTheExpectedNode(){
+        list.append(node);
+        list.append(node2);
+
+        Object expectedValue = node2;
+        Object obtainedValue = list.find(7);
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test
+    public void shouldReturnErrorIfDeletingANodeFromAnEmptyList(){
+
+        assertThrows(RuntimeException.class, () -> list.delete(node));
+
+    }
+    @Test // 18
+    public void shouldReturnTrueWhenDeletingTheFirstNodeOnTheListUsingDelete(){
+        list.append(node);
+        list.append(node2);
+        list.delete(node);
+        Object expectedValue = node2;
+        Object obtainedValue = list.getAt(0);
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 19
+    public void shouldReturnTrueWhenDeletingTheLastNodeOnTheListUsingDelete(){
+        list.append(node);
+        list.append(node2);
+        list.delete(node2);
+        Object expectedValue = node;
+        Object obtainedValue = list.getAt(list.size()-1);
+
+        assertEquals(expectedValue,obtainedValue);
+    }
+    @Test // 20
+    public void shouldReturnTrueWhenDeletingANodeOnAListWithMoreThanOneElement(){
+        list.append(node);
+        list.append(node2);
+        list.append(new DequeNode(10,null, null));
+        list.delete(node2);
+        Object expectedValue = 2;
+        Object obtainedValue = list.size();
+
+        assertEquals(expectedValue,obtainedValue);
+    }/*
+    @Test // 21
+    public void shouldReturnTrueWhenSortingCorrectlyAList(){
+        Comparator<Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        };
+
+        list.append(node2);
+        list.append(node);
+        list.append(new DequeNode(6,null, null));
+
+        DoubleLinkedListQueue aux = new DoubleLinkedListQueue();
+        aux.append(node);
+        aux.append(new DequeNode(6, null, null));
+        aux.append(node2);
+
+        list.sort(comparator);
+
+        Object expectedValue = aux;
+        Object obtainedValue = list;
+
+        assertEquals(expectedValue,obtainedValue);
+    }*/
+    @Test // 22
+    public void shouldReturnErrorWhenAccesingAWrongPosition(){
+        assertThrows(RuntimeException.class, () -> list.getAt(list.size()+1));
+        assertThrows(RuntimeException.class, () -> list.getAt(-1));
+    }
+    @Test // 23
+    public void shouldReturnErrorWhenFindingANonExistenItem(){
+        list.append(node);
+        list.append(node2);
+        assertThrows(RuntimeException.class, () -> list.find(10));
+    }
+
+    @Test // 24
+    public void shouldReturnErrorWhenDeletingANonExistenItem(){
+        list.append(node);
+        list.append(node2);
+        assertThrows(RuntimeException.class, () -> list.delete(new DequeNode(10,null,null)));
+    }
 
 }

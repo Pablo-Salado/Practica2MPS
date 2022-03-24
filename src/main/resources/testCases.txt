@@ -159,51 +159,42 @@ When - Usamos append(nodoAInsertar) y comprobamos si se ha insertado
 Then - Devolvera TRUE si el nodo se ha insertado correctamente al final de la lista
 --------------------------------------------------------------------------------
 4)
-Scenario - Añadir un nodo vacio al final de la lista
-
-Given - Tenemos la lista y el nodo vacio a añadir
- 
-When - Usamos append(nodoAInsertar)
- 
-Then - Devolvera ERROR ya que el nodo estaba vacio
---------------------------------------------------------------------------------
-5)
 Scenario - Eliminar el primer nodo de una lista
 
 Given - Tenemos la lista
- 
+
 When - Usamos deleteFirst() y comprobamos que se ha borrado correcamente
- 
+
 Then - Devolvera TRUE si se ha borrado correctamente
 --------------------------------------------------------------------------------
-6)
-Scenario - Eliminar el primer nodo de una lista vacia
+5)
+Scenario - Añadir un nodo vacio al final de la lista
 
-Given - Tenemos la lista vacia
- 
-When - Usamos deleteFirst()
- 
-Then - Devolvera ERROR ya que la lista esta vacia
+Given - Tenemos la lista y el nodo vacio a añadir
+
+When - Usamos append(nodoAInsertar)
+
+Then - Devolvera ERROR ya que el nodo estaba vacio
 --------------------------------------------------------------------------------
-7)
+6)
 Scenario - Eliminar el ultimo nodo de una lista
 
 Given - Tenemos la lista
- 
-When - Usamos deleteLast() y comprobamos que se ha borrado correcamente
- 
+
+When - Usamos deleteLast() y comprobamos que se ha borrado correctamente
+
 Then - Devolvera TRUE si se ha borrado correctamente
 --------------------------------------------------------------------------------
-8)
-Scenario - Eliminar el ultimo nodo de una lista vacia
+7)
+Scenario - Eliminar el primer y el ultimo nodo de una lista vacia
 
 Given - Tenemos la lista vacia
- 
-When - Usamos deleteLast()
- 
+
+When - Usamos deleteFirst() y deleteLast()
+
 Then - Devolvera ERROR ya que la lista esta vacia
 --------------------------------------------------------------------------------
-9)
+8)
 Scenario - Mostrar el primer nodo de una lista
 
 Given - Tenemos la lista
@@ -212,16 +203,7 @@ When - Usamos peekFirst()
  
 Then - Devolvera el primer nodo de la lista
 --------------------------------------------------------------------------------
-10)
-Scenario - Mostrar el primer nodo de una lista vacia
-
-Given - Tenemos la lista vacia
- 
-When - Usamos peekFirst()
- 
-Then - Devolvera ERROR ya que la lista esta vacia
---------------------------------------------------------------------------------
-11)
+9)
 Scenario - Mostrar el ultimo nodo de una lista
 
 Given - Tenemos la lista
@@ -230,16 +212,16 @@ When - Usamos peekLast()
  
 Then - Devolvera el primer nodo de la lista
 --------------------------------------------------------------------------------
-12)
-Scenario - Mostrar el ultimo nodo de una lista vacia
+10)
+Scenario - Mostrar un nodo de una lista vacia
 
 Given - Tenemos la lista vacia
  
-When - Usamos peekLast()
+When - Usamos peekLast() y peekFirst()
  
 Then - Devolvera ERROR ya que la lista esta vacia
 --------------------------------------------------------------------------------
-13)
+11)
 Scenario - Mostrar el tamaño de la lista
 
 Given - Tenemos la lista
@@ -247,4 +229,133 @@ Given - Tenemos la lista
 When - Usamos size()
  
 Then - Devolvera el tamaño de la lista
+--------------------------------------------------------------------------------
+12)
+Scenario - Eliminar un nodo de una lista con un elemento
+
+Given - Tenemos la lista
+
+When - Usamos delete(node) y comprobamos que se ha borrado correctamente
+
+Then - Devolvera TRUE si se ha borrado correctamente
+--------------------------------------------------------------------------------
+13)
+Scenario - Eliminar el primer nodo de una lista con un elemento
+
+Given - Tenemos la lista
+
+When - Usamos deleteFirst() y comprobamos que se ha borrado correctamente
+
+Then - Devolvera TRUE si se ha borrado correctamente
+--------------------------------------------------------------------------------
+14)
+Scenario - Eliminar el último nodo de una lista con un elemento
+
+Given - Tenemos la lista
+
+When - Usamos deleteLast() y comprobamos que se ha borrado correctamente
+
+Then - Devolvera TRUE si se ha borrado correctamente
+--------------------------------------------------------------------------------
+15)
+Scenario - Devolver el elemento de una posición
+
+Given - Tenemos la lista
+
+When - Usamos getAt() y comprobamos que el resultado de getAt es el elemento que queremos
+
+Then - Devolvera TRUE si el elemento es el correcto
+--------------------------------------------------------------------------------
+16)
+Scenario - Encontrar un nodo dado su item
+
+Given - Tenemos la lista
+
+When - Usamos find(item) y comprobamos que el resultado de find es el nodo que contiene dicho item
+
+Then - Devolvera TRUE si el elemento es el correcto
+--------------------------------------------------------------------------------
+17)
+Scenario - Eliminar un elemento de una lista vacía
+
+Given - Tenemos la lista vacía
+
+When - Usamos delete(node)
+
+Then - Devolvera ERROR ya que la lista esta vacia
+
+--------------------------------------------------------------------------------
+18)
+Scenario - Eliminar el primer elemento de una lista usando delete()
+
+Given - Tenemos la lista
+
+When - Usamos delete(node)
+
+Then - Devolvera TRUE si ha borrado correctamente
+--------------------------------------------------------------------------------
+19)
+Scenario - Eliminar el último elemento de una lista usando delete()
+
+Given - Tenemos la lista
+
+When - Usamos delete(node)
+
+Then - Devolvera TRUE si ha borrado correctamente
+--------------------------------------------------------------------------------
+20)
+Scenario - Eliminar un elemento de una lista con más de un elemento
+
+Given - Tenemos la lista
+
+When - Usamos delete(node)
+
+Then - Devolvera TRUE si ha borrado correctamente
+--------------------------------------------------------------------------------
+20)
+Scenario - Eliminar un elemento de una lista con más de un elemento
+
+Given - Tenemos la lista
+
+When - Usamos delete(node)
+
+Then - Devolvera TRUE si ha borrado correctamente
+
+--------------------------------------------------------------------------------
+21)
+Scenario - Ordenar una DoubleLinkedListQueue
+
+Given - Tenemos la lista
+
+When - Utilizamos una lista aux ya ordenada y llamamos al metodo sort para comparar
+
+Then - Devolvera TRUE si ha ordenado correctamente
+
+--------------------------------------------------------------------------------
+22)
+Scenario - Acceder a una posición errónea
+
+Given - Tenemos la lista
+
+When - Llamamos a getAt en primer lugar con un valor más grande que el tamaño de la lista y en segundo lugar con un valor negativo
+
+Then - Devolvera ERROR ya que las posiciones no son correctas
+--------------------------------------------------------------------------------
+23)
+Scenario - Buscar un nodo que no existe
+
+Given - Tenemos la lista
+
+When - Llamamos a find con un ítem que no está en la lista
+
+Then - Devolvera ERROR ya que el nodo no existe
+--------------------------------------------------------------------------------
+24)
+Scenario - Borrar un nodo que no existe
+
+Given - Tenemos la lista
+
+When - Llamamos a delete con un nodo que no está en la lista
+
+Then - Devolvera ERROR ya que el nodo no existe
 --------------------------------------------------------------------------------

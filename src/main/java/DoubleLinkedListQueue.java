@@ -107,7 +107,8 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         }
 
         while (i < position && result.getNext() != null){
-            result.getNext();
+            result = result.getNext();
+            i++;
         }
 
         return result;
@@ -168,7 +169,6 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         while (numElem != 0){
             aux.append(min);
             this.delete(min);
-            numElem--;
             min = getMin(this, comparator);
         }
         first = aux.peekFirst();
@@ -180,7 +180,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         DequeNode aux = list.peekFirst().getNext();
         DequeNode res = list.peekFirst();
 
-        if (aux == null || res == null) {
+        if (res == null) {
             throw new RuntimeException("Error: la lista esta vacia");
         } else {
             while (aux != null && res != null) {
