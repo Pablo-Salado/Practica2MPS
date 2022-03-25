@@ -167,9 +167,12 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         DequeNode min = getMin(this, comparator);
 
         while (numElem != 0){
-            aux.append(min);
+            DequeNode nuevo = new DequeNode<>(min.getItem(),null,null);
+            aux.append(nuevo);
             this.delete(min);
-            min = getMin(this, comparator);
+            if(numElem>0){
+                min = getMin(this, comparator);
+            }
         }
         first = aux.peekFirst();
         last = aux.peekLast();
