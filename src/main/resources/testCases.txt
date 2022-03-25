@@ -327,7 +327,7 @@ Scenario - Ordenar una DoubleLinkedListQueue
 
 Given - Tenemos la lista
 
-When - Utilizamos una lista aux ya ordenada y llamamos al metodo sort para comparar
+When - Ordenamos la lista y utilizamos assertTrue y comprobamos elemento por elemento que están ordenados
 
 Then - Devolvera TRUE si ha ordenado correctamente
 

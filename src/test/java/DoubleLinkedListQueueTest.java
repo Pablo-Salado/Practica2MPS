@@ -201,12 +201,13 @@ public class DoubleLinkedListQueueTest {
     }
     @Test // 20
     public void shouldReturnTrueWhenDeletingANodeOnAListWithMoreThanOneElement(){
+        DequeNode node3 = new DequeNode(10, null, null);
         list.append(node);
         list.append(node2);
-        list.append(new DequeNode(10,null, null));
+        list.append(node3);
         list.delete(node2);
-        Object expectedValue = 2;
-        Object obtainedValue = list.size();
+        Object expectedValue = node;
+        Object obtainedValue = list.peekLast().getPrevious();
 
         assertEquals(expectedValue,obtainedValue);
     }
@@ -223,18 +224,13 @@ public class DoubleLinkedListQueueTest {
         list.append(node);
         list.append(new DequeNode(6, null, null));
 
-        DoubleLinkedListQueue aux = new DoubleLinkedListQueue();
-
-        aux.append(new DequeNode(5, null, null));
-        aux.append(new DequeNode(6, null, null));
-        aux.append(new DequeNode(7, null, null));
-
         list.sort(comparator);
 
-        Object expectedValue = aux;
-        Object obtainedValue = list;
-
-        assertEquals(expectedValue, obtainedValue);
+        int i = 0;
+        while (i < list.size()-1){
+            assertTrue((Integer) list.getAt(i).getItem() <= (Integer) list.getAt(i+1).getItem());
+            i++;
+        }
     }
     @Test // 22
     public void shouldReturnErrorWhenAccesingAWrongPosition(){

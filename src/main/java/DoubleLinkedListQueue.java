@@ -154,6 +154,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
             if (curr.getItem().equals(node.getItem())){
                 next = curr.getNext();
                 prev.setNext(next);
+                next.setPrevious(prev);
                 numElem -= 1;
             } else {
                 throw new RuntimeException("Error: el nodo no esta en la lista");
@@ -186,7 +187,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
         if (res == null) {
             throw new RuntimeException("Error: la lista esta vacia");
         } else {
-            while (aux != null && res != null) {
+            while (aux != null && res != null && list.size() > 1) {
                 if (comparator.compare(aux.getItem(), res.getItem()) < 0){
                     res = aux;
                 } else {
