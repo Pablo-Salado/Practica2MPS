@@ -102,8 +102,8 @@ public class DoubleLinkedListQueueTest {
     }
     @Test // 9
     public void shouldReturnTheLastNodeOnTheList(){
-        list.appendLeft(node2);
         list.append(node);
+        list.appendLeft(node2);
 
         Object expectedValue = node;
         Object obtainedValue = list.peekLast();
@@ -119,7 +119,7 @@ public class DoubleLinkedListQueueTest {
     @Test
     public void shouldReturnTwoIfTheSizeOfTheListIsTwo(){
 
-        list.appendLeft(node2);
+        list.append(node2);
         list.append(node);
 
         Object expectedValue = 2;
@@ -249,7 +249,7 @@ public class DoubleLinkedListQueueTest {
     }
 
     @Test // 24
-    public void shouldReturnErrorWhenDeletingANonExistenItem(){
+    public void shouldReturnErrorWhenDeletingANonExistentItem(){
         list.append(node);
         list.append(node2);
         assertThrows(RuntimeException.class, () -> list.delete(new DequeNode(10,null,null)));

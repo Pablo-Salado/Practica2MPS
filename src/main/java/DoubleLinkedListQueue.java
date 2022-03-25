@@ -135,7 +135,7 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
     public void delete(DequeNode node) {
         if (numElem == 0){
             throw new RuntimeException("Error al borrar un nodo: la lista no contiene nodos");
-        }  else if (numElem == 1){
+        }  else if (numElem == 1 && node.getItem().equals(peekFirst().getItem())){
             last = null;
             first = null;
             numElem -= 1;
@@ -145,13 +145,13 @@ public class DoubleLinkedListQueue<T> implements  DoubleEndedQueue{
             deleteLast();
         } else {
             DequeNode prev, curr, next;
-            prev = first;
-            curr = first.getNext();
-            while (curr != null && !curr.equals(node)){
+            prev = peekFirst();
+            curr = peekFirst().getNext();
+            while (curr != null && !curr.getItem().equals(node.getItem())){
                 prev = curr;
                 curr = curr.getNext();
             }
-            if (curr.equals(node)){
+            if (curr.getItem().equals(node.getItem())){
                 next = curr.getNext();
                 prev.setNext(next);
                 numElem -= 1;
