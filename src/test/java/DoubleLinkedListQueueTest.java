@@ -24,7 +24,7 @@ public class DoubleLinkedListQueueTest {
         node = null;
         node2 = null;
     }
-    @Test
+    @Test //1
     public void shouldReturnTrueIfNodeAddedOnFirstPosition(){
 
         list.append(node2); //añadimos un nodo a la lista
@@ -35,13 +35,13 @@ public class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
+    @Test //2
     public void shouldReturnErrorIfNodeToAddAtFirstOfTheListIsNull(){
         node = new DequeNode(null,null,null);
 
         assertThrows(RuntimeException.class, () -> list.appendLeft(node));
     }
-    @Test
+    @Test //3
     public void shouldReturnTrueIfNodeAddedOnLastPosition(){
         list.appendLeft(node2); //añadimos un nodo a la lista
         list.append(node); // añadimos el nodo a comprobar al final
@@ -51,7 +51,7 @@ public class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
+    @Test //4
     public void shouldReturnTrueIfFirstNodeWasDeleted(){
         list.appendLeft(node2);
         list.append(node);
@@ -69,7 +69,7 @@ public class DoubleLinkedListQueueTest {
 
         assertThrows(RuntimeException.class, () -> list.append(node));
     }
-    @Test
+    @Test // 6
     public void shouldReturnTrueIfLastNodeWasDeleted(){
         list.appendLeft(node2);
         list.append(node);
@@ -81,7 +81,7 @@ public class DoubleLinkedListQueueTest {
         assertNotEquals(deletedValue,obtainedValue);
     }
 
-    @Test
+    @Test //7
     public void shouldReturnErrorIfDeletingFirstOrLastNodeFromAnEmptyList(){
 
         assertThrows(RuntimeException.class, () -> list.deleteLast());
@@ -89,7 +89,7 @@ public class DoubleLinkedListQueueTest {
 
     }
 
-    @Test
+    @Test //8
     public void shouldReturnTheFirstNodeOnTheList(){
 
         list.appendLeft(node2);
@@ -109,14 +109,14 @@ public class DoubleLinkedListQueueTest {
         Object obtainedValue = list.peekLast();
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
+    @Test // 10
     public void shouldReturnErrorWhenPeekOnEmtyList(){
 
         assertThrows(RuntimeException.class, () -> list.peekFirst());
         assertThrows(RuntimeException.class, () -> list.peekLast());
     }
 
-    @Test
+    @Test //11
     public void shouldReturnTwoIfTheSizeOfTheListIsTwo(){
 
         list.append(node2);
@@ -173,7 +173,7 @@ public class DoubleLinkedListQueueTest {
 
         assertEquals(expectedValue,obtainedValue);
     }
-    @Test
+    @Test // 17
     public void shouldReturnErrorIfDeletingANodeFromAnEmptyList(){
 
         assertThrows(RuntimeException.class, () -> list.delete(node));
@@ -250,5 +250,18 @@ public class DoubleLinkedListQueueTest {
         list.append(node2);
         assertThrows(RuntimeException.class, () -> list.delete(new DequeNode(10,null,null)));
     }
+
+    @Test // 25
+    public void shouldReturnErrorWhenSortingAnEmptyList(){
+        Comparator<Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        };
+        assertThrows(RuntimeException.class, () -> list.sort(comparator));
+
+    }
+
 
 }
