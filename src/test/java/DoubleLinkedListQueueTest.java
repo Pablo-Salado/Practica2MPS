@@ -250,18 +250,4 @@ public class DoubleLinkedListQueueTest {
         list.append(node2);
         assertThrows(RuntimeException.class, () -> list.delete(new DequeNode(10,null,null)));
     }
-
-    @Test // 25
-    public void shouldReturnErrorWhenSortingAnEmptyList(){
-        Comparator<Integer> comparator = new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        };
-        assertThrows(RuntimeException.class, () -> list.sort(comparator));
-
-    }
-
-
 }
